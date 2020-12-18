@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -20,12 +20,14 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+  <meta name="description" content="冲！">
+<meta property="og:type" content="website">
+<meta property="og:title" content="小川同学的blogs">
 <meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+<meta property="og:site_name" content="小川同学的blogs">
+<meta property="og:description" content="冲！">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="晚安">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://example.com/">
@@ -37,11 +39,11 @@
     sidebar: "",
     isHome : true,
     isPost : false,
-    lang   : 'en'
+    lang   : 'zh-CN'
   };
 </script>
 
-  <title>Hexo</title>
+  <title>小川同学的blogs</title>
   
 
 
@@ -81,7 +83,7 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="切换导航栏">
       <span class="toggle-line toggle-line-first"></span>
       <span class="toggle-line toggle-line-middle"></span>
       <span class="toggle-line toggle-line-last"></span>
@@ -92,9 +94,10 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
+      <h1 class="site-title">小川同学的blogs</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
+      <p class="site-subtitle" itemprop="description">学习&生活</p>
   </div>
 
   <div class="site-nav-right">
@@ -110,12 +113,27 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
   </ul>
@@ -144,17 +162,17 @@
       
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/03/ctfshowweb%E5%85%A5%E9%97%A81-20%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/timg.jpg">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/OIP.jpg">
+      <meta itemprop="name" content="晚安">
+      <meta itemprop="description" content="冲！">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="小川同学的blogs">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -167,16 +185,16 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">发表于</span>
 
-              <time title="Created: 2020-12-03 15:32:55" itemprop="dateCreated datePublished" datetime="2020-12-03T15:32:55+08:00">2020-12-03</time>
+              <time title="创建时间：2020-12-03 15:32:55" itemprop="dateCreated datePublished" datetime="2020-12-03T15:32:55+08:00">2020-12-03</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-06 22:36:33" itemprop="dateModified" datetime="2020-12-06T22:36:33+08:00">2020-12-06</time>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-18 16:43:42" itemprop="dateModified" datetime="2020-12-18T16:43:42+08:00">2020-12-18</time>
               </span>
 
           
@@ -191,25 +209,23 @@
 
       
           <p>花199买的题目真香，入门是真的很入门(但我还是疯狂看hint才行)，这里总结一下我看到的知识点，也算不虚此行。</p>
-<p>web 1 : 直接看网页源码</p>
-<p>web 2 : ctrl+U查看网页源码，或者是在url前加上view-source:来查看源码</p>
-<p>web 3 : 抓包看响应头</p>
-<p>web 4 : 访问robots.txt文件，这个文件里有开发者不希望搜索引擎访问的部分</p>
-<p>web 5 : 有些网站会有index.phps文件，我也不知道哪些会有，总之是信息搜集的方法之一(phps就是php的源代码文件，通常用于提供给用户（访问者）直接通过Web浏览器查看php代码的内容。)</p>
-<p>web 6 : 在url后面直接添加<a target="_blank" rel="noopener" href="http://www.zip得到源码压缩包/">www.zip得到源码压缩包</a></p>
-<p>web 7 : 考察git泄漏，解法是直接加上/git/index.php；git泄漏</p>
-<p><img src="C:\Users\xhc\AppData\Roaming\Typora\typora-user-images\image-20201206222856892.png"><img src="C:\Users\xhc\AppData\Roaming\Typora\typora-user-images\image-20201206222947323.png"></p>
-<p><img src="C:\Users\xhc\AppData\Roaming\Typora\typora-user-images\image-20201206223032102.png"></p>
-<p>web 8 : 考察svn泄漏，直接在url后加上.svn; 造成SVN源代码漏洞的主要原因是管理员操作不规范。“在使用SVN管理本地代码过程中，会自动生成一个名为.svn的隐藏文件夹，其中包含重要的源代码信息。但一些网站管理员在发布代码时，不愿意使用‘导出’功能，而是直接复制代码文件夹到WEB服务器上，这就使.svn隐藏文件夹被暴露于外网环境，黑客可以借助其中包含的用于版本信息追踪的‘entries’文件，逐步摸清站点结构。”</p>
-<p>web 9 : 提示使用vim时死机了，所以去看vim的备份文件，在url后加上index.php.swp</p>
-<p>web 10 : 直接f12看cookie</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/12/03/ctfshowweb%E5%85%A5%E9%97%A81-20%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
     
     
     
+    <div>
+      
+    </div>
       <footer class="post-footer">
         <div class="post-eof"></div>
       </footer>
@@ -221,17 +237,17 @@
       
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/29/%E5%85%A8%E6%8E%92%E5%88%97+%E9%80%86%E5%BA%8F%E5%AF%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/timg.jpg">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/OIP.jpg">
+      <meta itemprop="name" content="晚安">
+      <meta itemprop="description" content="冲！">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="小川同学的blogs">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -244,11 +260,17 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
+              <span class="post-meta-item-text">发表于</span>
 
-              <time title="Created: 2020-11-29 11:21:46 / Modified: 11:21:35" itemprop="dateCreated datePublished" datetime="2020-11-29T11:21:46+08:00">2020-11-29</time>
+              <time title="创建时间：2020-11-29 11:21:46" itemprop="dateCreated datePublished" datetime="2020-11-29T11:21:46+08:00">2020-11-29</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-18 16:43:21" itemprop="dateModified" datetime="2020-12-18T16:43:21+08:00">2020-12-18</time>
+              </span>
 
           
 
@@ -262,27 +284,23 @@
 
       
           <p>一点点来看吧。</p>
-<p>首先2个数的全排为 1，2 或2，1。有一个逆序对。</p>
-<p>三个数的全排为1，2，3；1，3，2；2，1，3；2，3，1；3，2，1；3，1，2；</p>
-<p>通过找规律可以发现1，2，3；2，1，3；3，1，2；这三个序列是1，2；的变种，因为除去首位之后后两个数的全排的逆序对数量与1，2；相同。所以3个数全排的逆序对数量=(0+0)+(1+0)+(2+0)+(0+1)+(1+1)+(1+2)=9种</p>
-<p>然后去网上找了一下递推公式</p>
-<blockquote>
-<p>dp[i]=(dp[i-1]+dp[i-1]+(i-1)<em>q)</em>(i)/2</p>
-</blockquote>
-<p>其中q = ( i-1 )!，q为i-1的阶乘。</p>
-<p>dp[1]=0;dp[2]=1;</p>
-<p>代码通过快速幂实现</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> ll mod=<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line">ll dp[<span class="number">104</span>];</span><br><span class="line">ll factorial[<span class="number">105</span>];      <span class="comment">//储存阶乘</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">105</span>;</span><br><span class="line"><span class="function">ll <span class="title">fastpow</span><span class="params">(ll base,<span class="keyword">int</span> x)</span>    <span class="comment">//快速幂</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll ans=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(x)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>( x&amp;<span class="number">1</span> )</span><br><span class="line">            ans = (ans*base)%mod;</span><br><span class="line">        base = ( base*base )%mod;</span><br><span class="line">        x = x&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll total=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span> ;i&lt;=maxn;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        total=(total*i)%mod;</span><br><span class="line">        factorial[i]=total;</span><br><span class="line">    &#125;</span><br><span class="line">    dp[<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">    dp[<span class="number">2</span>]=<span class="number">1</span>;</span><br><span class="line">    ll up;</span><br><span class="line">    ll ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">3</span>;i&lt;=maxn;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ll q=factorial[i<span class="number">-1</span>];</span><br><span class="line">        up=(dp[i<span class="number">-1</span>]*<span class="number">2</span>+(( i<span class="number">-1</span> )*q)%mod)%mod;</span><br><span class="line">        up=(up*i)%mod;</span><br><span class="line">        ans=(up*fastpow(<span class="number">2</span>,mod<span class="number">-2</span>))%mod;</span><br><span class="line">        dp[i]=ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    init();</span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;x)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;dp[x]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>详情参考这篇博客:<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39627843/article/details/81204671?biz_id=102&amp;utm_term=%E5%85%A8%E6%8E%92%E5%88%97%E9%80%86%E5%BA%8F%E5%AF%B9&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-81204671&amp;spm=1018.2118.3001.4449">https://blog.csdn.net/qq_39627843/article/details/81204671?biz_id=102&amp;utm_term=%E5%85%A8%E6%8E%92%E5%88%97%E9%80%86%E5%BA%8F%E5%AF%B9&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-81204671&amp;spm=1018.2118.3001.4449</a></p>
-<p>我也是在这学的。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/11/29/%E5%85%A8%E6%8E%92%E5%88%97+%E9%80%86%E5%BA%8F%E5%AF%B9/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
     
     
     
+    <div>
+      
+    </div>
       <footer class="post-footer">
         <div class="post-eof"></div>
       </footer>
@@ -294,17 +312,17 @@
       
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/26/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E8%AF%95%E8%AF%95%E6%B0%B4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/timg.jpg">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/OIP.jpg">
+      <meta itemprop="name" content="晚安">
+      <meta itemprop="description" content="冲！">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="小川同学的blogs">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -317,10 +335,10 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="Created: 2020-11-26 14:10:46 / Modified: 15:19:34" itemprop="dateCreated datePublished" datetime="2020-11-26T14:10:46+08:00">2020-11-26</time>
+              <time title="创建时间：2020-11-26 14:10:46 / 修改时间：15:19:34" itemprop="dateCreated datePublished" datetime="2020-11-26T14:10:46+08:00">2020-11-26</time>
             </span>
 
           
@@ -341,76 +359,9 @@
     
     
     
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/26/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/timg.jpg">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/26/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-11-26 13:05:39" itemprop="dateCreated datePublished" datetime="2020-11-26T13:05:39+08:00">2020-11-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
+    <div>
       
     </div>
-
-    
-    
-    
       <footer class="post-footer">
         <div class="post-eof"></div>
       </footer>
@@ -463,10 +414,10 @@
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
-          Table of Contents
+          文章目录
         </li>
         <li class="sidebar-nav-overview">
-          Overview
+          站点概览
         </li>
       </ul>
 
@@ -477,22 +428,27 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="John Doe"
-      src="/images/timg.jpg">
-  <p class="site-author-name" itemprop="name">John Doe</p>
-  <div class="site-description" itemprop="description"></div>
+    <img class="site-author-image" itemprop="image" alt="晚安"
+      src="/images/OIP.jpg">
+  <p class="site-author-name" itemprop="name">晚安</p>
+  <div class="site-description" itemprop="description">冲！</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
-          <span class="site-state-item-name">posts</span>
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
         </a>
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:1507452902@qq.com" title="E-Mail → mailto:1507452902@qq.com" rel="noopener" target="_blank"><i class="fa fa-qq fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
 
 
 
@@ -517,11 +473,11 @@
   &copy; 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
-    <i class="crown"></i>
+    <i class="晚安"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">晚安</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
 
         
@@ -538,6 +494,8 @@
   </div>
 
   
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
