@@ -28,7 +28,7 @@
 <meta property="og:description" content="花199买的题目真香，入门是真的很入门(但我还是疯狂看hint才行)，这里总结一下我看到的知识点，也算不虚此行。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-12-03T07:32:55.996Z">
-<meta property="article:modified_time" content="2020-12-18T15:57:16.005Z">
+<meta property="article:modified_time" content="2021-03-10T14:21:29.849Z">
 <meta property="article:author" content="晚安">
 <meta name="twitter:card" content="summary">
 
@@ -196,7 +196,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-18 23:57:16" itemprop="dateModified" datetime="2020-12-18T23:57:16+08:00">2020-12-18</time>
+                <time title="修改时间：2021-03-10 22:21:29" itemprop="dateModified" datetime="2021-03-10T22:21:29+08:00">2021-03-10</time>
               </span>
 
           
@@ -213,26 +213,25 @@
         <p>花199买的题目真香，入门是真的很入门(但我还是疯狂看hint才行)，这里总结一下我看到的知识点，也算不虚此行。</p>
 <a id="more"></a>
 
-<p>web 1 : 直接看网页源码</p>
-<p>web 2 : ctrl+U查看网页源码，或者是在url前加上view-source:来查看源码</p>
-<p>web 3 : 抓包看响应头</p>
-<p>web 4 : 访问robots.txt文件，这个文件里有开发者不希望搜索引擎访问的部分</p>
-<p>web 5 : 有些网站会有index.phps文件，我也不知道哪些会有，总之是信息搜集的方法之一(phps就是php的源代码文件，通常用于提供给用户（访问者）直接通过Web浏览器查看php代码的内容。)</p>
-<p>web 6 : 在url后面直接添加<a target="_blank" rel="noopener" href="http://www.zip得到源码压缩包/">www.zip得到源码压缩包</a></p>
-<p>web 7 : 考察git泄漏，解法是直接加上/git/index.php；</p>
-<p>web 8 : 考察svn泄漏，直接在url后加上.svn; 造成SVN源代码漏洞的主要原因是管理员操作不规范。“在使用SVN管理本地代码过程中，会自动生成一个名为.svn的隐藏文件夹，其中包含重要的源代码信息。但一些网站管理员在发布代码时，不愿意使用‘导出’功能，而是直接复制代码文件夹到WEB服务器上，这就使.svn隐藏文件夹被暴露于外网环境，黑客可以借助其中包含的用于版本信息追踪的‘entries’文件，逐步摸清站点结构。”</p>
-<p>web 9 : 提示使用vim时死机了，所以去看vim的备份文件，在url后加上index.php.swp</p>
-<p>web 10 : 直接f12看cookie</p>
-<p>web 11: DNS检查网站运维；TXT 记录，一般指为某个主机名或域名设置的说明。</p>
-<p>web 12 : ez。</p>
-<p>web 13 : document文件里有密码泄漏。</p>
-<p>web 14 : 根据题目提示访问/editor,然后在文件上传处找到文件空间，var下的www目录是1部署的文件，找到flag位置，访问即可。</p>
-<p>web 15 : 网页中的一些公开邮箱可能会泄漏信息，比如你所在的城市，进入/admin后点击忘记密码然后根据邮箱地址完成密码重置即可。</p>
-<p>web 16 : 考察PHP探针php探针是用来探测空间、服务器运行状况和PHP信息用的，探针可以实时查看服务器硬盘资源、内存占用、网卡 流量、系统负载、服务器时间等信息。 url后缀名添加/tz.php 版本是雅黑PHP探针，然后查看phpinfo搜索flag。</p>
-<p>web 17 : 要找真实ip，直接ping就完事儿了。</p>
-<p>web 18 : 这种网页小游戏肯定是不可能去玩的啦，快进到看js文件然后解码。</p>
-<p>web 19 : 题解告诉我前端有加密，所以post提交用户名和密码。</p>
-<p>web 20 : mdb文件是早期asp+access构架的数据库文件，直接查看url路径添加/db/db.mdb 下载文件通过txt打开或者通过EasyAccess.exe打开搜索flag</p>
+<h3 id="web-1"><a href="#web-1" class="headerlink" title="web 1"></a>web 1</h3><h3 id="直接看网页源码"><a href="#直接看网页源码" class="headerlink" title="直接看网页源码"></a>直接看网页源码</h3><h3 id="web-2"><a href="#web-2" class="headerlink" title="web 2"></a>web 2</h3><p>ctrl+U查看网页源码，或者是在url前加上view-source:来查看源码</p>
+<h3 id="web-3"><a href="#web-3" class="headerlink" title="web 3"></a>web 3</h3><p>抓包看响应头</p>
+<h3 id="web-4"><a href="#web-4" class="headerlink" title="web 4"></a>web 4</h3><p>访问robots.txt文件，这个文件里有开发者不希望搜索引擎访问的部分</p>
+<h3 id="web-5"><a href="#web-5" class="headerlink" title="web 5"></a>web 5</h3><p>有些网站会有index.phps文件，我也不知道哪些会有，总之是信息搜集的方法之一(phps就是php的源代码文件，通常用于提供给用户（访问者）直接通过Web浏览器查看php代码的内容。)</p>
+<h3 id="web-6"><a href="#web-6" class="headerlink" title="web 6"></a>web 6</h3><p>在url后面直接添加<a target="_blank" rel="noopener" href="http://www.zip得到源码压缩包/">www.zip得到源码压缩包</a></p>
+<h3 id="web-7"><a href="#web-7" class="headerlink" title="web 7"></a>web 7</h3><p>考察git泄漏，解法是直接加上/git/index.php；</p>
+<h3 id="web-8"><a href="#web-8" class="headerlink" title="web 8"></a>web 8</h3><p>考察svn泄漏，直接在url后加上.svn; 造成SVN源代码漏洞的主要原因是管理员操作不规范。“在使用SVN管理本地代码过程中，会自动生成一个名为.svn的隐藏文件夹，其中包含重要的源代码信息。但一些网站管理员在发布代码时，不愿意使用‘导出’功能，而是直接复制代码文件夹到WEB服务器上，这就使.svn隐藏文件夹被暴露于外网环境，黑客可以借助其中包含的用于版本信息追踪的‘entries’文件，逐步摸清站点结构。”</p>
+<h3 id="web-9"><a href="#web-9" class="headerlink" title="web 9"></a>web 9</h3><p>提示使用vim时死机了，所以去看vim的备份文件，在url后加上index.php.swp</p>
+<h3 id="web-10"><a href="#web-10" class="headerlink" title="web 10"></a>web 10</h3><p>直接f12看cookie</p>
+<h3 id="web-11"><a href="#web-11" class="headerlink" title="web 11"></a>web 11</h3><p>DNS检查网站运维；TXT 记录，一般指为某个主机名或域名设置的说明。</p>
+<h3 id="web-12"><a href="#web-12" class="headerlink" title="web 12"></a>web 12</h3><p>ez。</p>
+<h3 id="web-13"><a href="#web-13" class="headerlink" title="web 13"></a>web 13</h3><p>document文件里有密码泄漏。</p>
+<h3 id="web-14"><a href="#web-14" class="headerlink" title="web 14"></a>web 14</h3><p>根据题目提示访问/editor,然后在文件上传处找到文件空间，var下的www目录是1部署的文件，找到flag位置，访问即可。</p>
+<h3 id="web-15"><a href="#web-15" class="headerlink" title="web 15"></a>web 15</h3><p>网页中的一些公开邮箱可能会泄漏信息，比如你所在的城市，进入/admin后点击忘记密码然后根据邮箱地址完成密码重置即可。</p>
+<h3 id="web-16"><a href="#web-16" class="headerlink" title="web 16"></a>web 16</h3><p>考察PHP探针php探针是用来探测空间、服务器运行状况和PHP信息用的，探针可以实时查看服务器硬盘资源、内存占用、网卡 流量、系统负载、服务器时间等信息。 url后缀名添加/tz.php 版本是雅黑PHP探针，然后查看phpinfo搜索flag。</p>
+<h3 id="web-17"><a href="#web-17" class="headerlink" title="web 17"></a>web 17</h3><p>要找真实ip，直接ping就完事儿了。</p>
+<h3 id="web-18"><a href="#web-18" class="headerlink" title="web 18"></a>web 18</h3><p>这种网页小游戏肯定是不可能去玩的啦，快进到看js文件然后解码。</p>
+<h3 id="web-19"><a href="#web-19" class="headerlink" title="web 19"></a>web 19</h3><p>题解告诉我前端有加密，所以post提交用户名和密码。</p>
+<h3 id="web-20"><a href="#web-20" class="headerlink" title="web 20"></a>web 20</h3><p>mdb文件是早期asp+access构架的数据库文件，直接查看url路径添加/db/db.mdb 下载文件通过txt打开或者通过EasyAccess.exe打开搜索flag</p>
 
     </div>
 
@@ -323,6 +322,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#web-1"><span class="nav-text">web 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E7%9C%8B%E7%BD%91%E9%A1%B5%E6%BA%90%E7%A0%81"><span class="nav-text">直接看网页源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-2"><span class="nav-text">web 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-3"><span class="nav-text">web 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-4"><span class="nav-text">web 4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-5"><span class="nav-text">web 5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-6"><span class="nav-text">web 6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-7"><span class="nav-text">web 7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-8"><span class="nav-text">web 8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-9"><span class="nav-text">web 9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-10"><span class="nav-text">web 10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-11"><span class="nav-text">web 11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-12"><span class="nav-text">web 12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-13"><span class="nav-text">web 13</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-14"><span class="nav-text">web 14</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-15"><span class="nav-text">web 15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-16"><span class="nav-text">web 16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-17"><span class="nav-text">web 17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-18"><span class="nav-text">web 18</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-19"><span class="nav-text">web 19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-20"><span class="nav-text">web 20</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
