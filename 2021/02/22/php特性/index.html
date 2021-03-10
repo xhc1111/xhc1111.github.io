@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="既然看了书，那就记录一下呗。">
+  <meta name="description" content="web 89 : 用非空数组绕过intval payload : ?num[]&#x3D;1 web 91 : php中m参数是多行匹配的意思，传过去的多行中有一行满足条件即可(%0a是换行) web 95 : Linux下表示当前目录是.&#x2F; web 100&amp;102 : 反射类 反射类例子如下  getConstants());  获取一组常量 输出 array(1) {      [&quot;PI&quot;]">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ctf从0到1信息收集笔记">
-<meta property="og:url" content="http://example.com/2020/12/20/ctf%E4%BB%8E0%E5%88%B01-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="ctfshow web入门 php特性">
+<meta property="og:url" content="http://example.com/2021/02/22/php%E7%89%B9%E6%80%A7/index.html">
 <meta property="og:site_name" content="小川同学的blogs">
-<meta property="og:description" content="既然看了书，那就记录一下呗。">
+<meta property="og:description" content="web 89 : 用非空数组绕过intval payload : ?num[]&#x3D;1 web 91 : php中m参数是多行匹配的意思，传过去的多行中有一行满足条件即可(%0a是换行) web 95 : Linux下表示当前目录是.&#x2F; web 100&amp;102 : 反射类 反射类例子如下  getConstants());  获取一组常量 输出 array(1) {      [&quot;PI&quot;]">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-12-20T13:07:45.001Z">
-<meta property="article:modified_time" content="2020-12-30T14:03:46.245Z">
+<meta property="article:published_time" content="2021-02-22T14:11:34.511Z">
+<meta property="article:modified_time" content="2021-03-10T14:11:06.688Z">
 <meta property="article:author" content="晚安">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2020/12/20/ctf%E4%BB%8E0%E5%88%B01-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E7%AC%94%E8%AE%B0/">
+<link rel="canonical" href="http://example.com/2021/02/22/php%E7%89%B9%E6%80%A7/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>ctf从0到1信息收集笔记 | 小川同学的blogs</title>
+  <title>ctfshow web入门 php特性 | 小川同学的blogs</title>
   
 
 
@@ -166,7 +166,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/20/ctf%E4%BB%8E0%E5%88%B01-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E7%AC%94%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/22/php%E7%89%B9%E6%80%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/OIP.jpg">
@@ -179,7 +179,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          ctf从0到1信息收集笔记
+          ctfshow web入门 php特性
         </h1>
 
         <div class="post-meta">
@@ -189,14 +189,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-12-20 21:07:45" itemprop="dateCreated datePublished" datetime="2020-12-20T21:07:45+08:00">2020-12-20</time>
+              <time title="创建时间：2021-02-22 22:11:34" itemprop="dateCreated datePublished" datetime="2021-02-22T22:11:34+08:00">2021-02-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-30 22:03:46" itemprop="dateModified" datetime="2020-12-30T22:03:46+08:00">2020-12-30</time>
+                <time title="修改时间：2021-03-10 22:11:06" itemprop="dateModified" datetime="2021-03-10T22:11:06+08:00">2021-03-10</time>
               </span>
 
           
@@ -210,38 +210,144 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>既然看了书，那就记录一下呗。</p>
-<a id="more"></a>
+        <a id="more"></a>
 
-<p>信息搜集涵盖方面广，有备份文件，目录信息，Banner信息等。</p>
-<h3 id="敏感目录泄漏"><a href="#敏感目录泄漏" class="headerlink" title="敏感目录泄漏"></a>敏感目录泄漏</h3><ol>
-<li><p>git泄漏:(git是主流的分布式版本控制系统，开发人员开发中遗忘.git文件夹，导致git泄漏)</p>
-<p>(1)常规git泄漏:</p>
-<p>​    无需任何别的操作，只要用工具即可，这里码一个工具<a target="_blank" rel="noopener" href="https://github.com/denny0223/scrabble">https://github.com/denny0223/scrabble</a></p>
-<p>(2)git回滚:</p>
-<p>​    git作为一个版本控制工具，会记录每次提交的修改，所以当题目存在git泄漏时，敏感文件可能已经被删除或覆盖了，我们可以用git的”git reset”命令来恢复到以前的版本。工具还是上一个工具，输入”git reset –hard HEAD^”即可回到上一个版本。除此之外，还可以使用”git log -stat”查看每个commit修改了哪些文件，再用”git diffHEADcommit-id”比较当前版本与想查看的commit之间的变化。</p>
-<p>(3)git分支:每次提交时，git都会把他们串成一条时间线，这条时间线就是一个分支，git支持多个分支。git中默认为master分支。而我们要的flag不一定在默认分支中，这时用”git log”命令只能找当前分支的修改。</p>
-<p>​    现在大部分工具不支持分支，要还原其他分支的代码往往需要手工进行文件提取，这里以功能较强的GitHacker(<a target="_blank" rel="noopener" href="https://github.com/WangYihang/GitHacker)%E5%B7%A5%E5%85%B7%E4%B8%BA%E4%BE%8B%E3%80%82GitHacker%E4%BD%BF%E7%94%A8%E5%8D%81%E5%88%86%E7%AE%80%E5%8D%95%EF%BC%8C%E5%8F%AA%E9%9C%80%E8%A6%81%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4&quot;python">https://github.com/WangYihang/GitHacker)工具为例。GitHacker使用十分简单，只需要执行命令&quot;python</a> GotHacker.py <a target="_blank" rel="noopener" href="http://127.0.0.1:8000/.git&quot;%E3%80%82%E8%BF%90%E8%A1%8C%E5%90%8E%EF%BC%8C%E6%88%91%E4%BB%AC%E4%BC%9A%E5%9C%A8%E6%9C%AC%E5%9C%B0%E7%9C%8B%E5%88%B0%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%EF%BC%8C%E8%BF%9B%E5%85%A5%E5%90%8E%E6%89%A7%E8%A1%8C&quot;git">http://127.0.0.1:8000/.git&quot;。运行后，我们会在本地看到生成的文件夹，进入后执行&quot;git</a> log –all”或”git branch -v”命令，只能看到master的分支信息。如果执行”git reflog”命令，就能看到一些checkout的记录。但自动化工具之还原了master的信息，因此要手动下载other分支的head信息，保存到.git/refs/heads/other中(执行命令 wget <a target="_blank" rel="noopener" href="http://127.0.0.1:8000/.git/refs/heads/other)%E3%80%82%E5%9B%9E%E5%A4%8Dhead%E4%BF%A1%E6%81%AF%E5%90%8E%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%E9%83%A8%E5%88%86%E4%BB%A3%E7%A0%81%EF%BC%8C%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E5%A4%8D%E7%94%A8GitHacker%E7%9A%84%E9%83%A8%E5%88%86%E4%BB%A3%E7%A0%81%EF%BC%8C%E4%BB%A5%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D%E5%88%86%E6%94%AF%E7%9A%84%E6%95%88%E6%9E%9C%E3%80%82%E5%85%B7%E4%BD%93%E5%92%8B%E6%81%A2%E5%A4%8D%E5%91%A2%E7%9C%8B%E4%B9%A6%E6%B2%A1%E7%9C%8B%E6%87%82%EF%BC%8C%E6%9C%89%E6%9C%BA%E4%BC%9A%E5%8E%BB%E8%B4%B4%E8%B4%B4%E5%A4%A7%E4%BD%AC%E5%AD%A6%E4%B8%80%E5%AD%A6%E3%80%82">http://127.0.0.1:8000/.git/refs/heads/other)。回复head信息后我们可以看到部分代码，我们可以复用GitHacker的部分代码，以实现自动回复分支的效果。具体咋恢复呢看书没看懂，有机会去贴贴大佬学一学。</a></p>
-<p>(4)git泄漏的其他运用:除了查看源码的常见利用方式外，泄漏的git中可能有其他有用的信息，如.git/comfig文件夹中可能含有access——token信息，从而访问这个用户的仓库。</p>
-</li>
-<li><p>svn泄漏:(svn是源代码版本管理软件)造成ssvn泄漏的原因是管理员操作不当将svn隐藏文件夹暴露于外网，可以利用.svn/extires或wc.db文件获取服务器源码等信息。码一下工具。</p>
-<p><a target="_blank" rel="noopener" href="https://github/kost/dvcs-ripper%EF%BC%8CSeay-svn%E3%80%82">https://github/kost/dvcs-ripper，Seay-svn。</a></p>
-</li>
-<li><p>HG泄漏:项目初始化时，HG会在当前文件夹前下创建一个.hg隐藏文件夹，其中包含代码和分支修改记录等信息。工具:<a target="_blank" rel="noopener" href="https://github/kost/dvcs-ripper%E3%80%82">https://github/kost/dvcs-ripper。</a></p>
-</li>
-</ol>
-<h3 id="敏感备份文件"><a href="#敏感备份文件" class="headerlink" title="敏感备份文件"></a>敏感备份文件</h3><ol>
-<li><p>gedit备份文件 : 在Linux下，用gedit编辑器保存之后，当前目录下会生成一个后缀为”~”的文件，其内容就是刚刚编辑的内容。通过浏览器访问这个文件即可得到源代码。</p>
-</li>
-<li><p>vim备份文件 : 当文件编辑被意外中断之后会生成一个备份文件，名称格式为.文件名.swp，我们可以用vim -r 命令来恢复这个备份文件(第一次为.swp，第二次为.swo，第三次为.swn，以此类推)。</p>
-</li>
-<li><p>常规文件 : </p>
-<p>​    robots.txt : 记录一些目录和CMS版本信息。</p>
-<p>​    readme.md : 记录CMS版本信息，有的甚至有GIthub地址。</p>
-<p>​    <a target="_blank" rel="noopener" href="http://www.zip/rar/tar.gz">www.zip/rar/tar.gz</a> : 往往是网站的源码备份。</p>
-</li>
-</ol>
-<h3 id="Banner识别"><a href="#Banner识别" class="headerlink" title="Banner识别"></a>Banner识别</h3><p>不知道啥意思</p>
+<p>web 89 : 用非空数组绕过intval payload : ?num[]=1</p>
+<p>web 91 : php中m参数是多行匹配的意思，传过去的多行中有一行满足条件即可(%0a是换行)</p>
+<p>web 95 : Linux下表示当前目录是./</p>
+<p>web 100&amp;102 : 反射类 反射类例子如下</p>
+<blockquote>
+<?php
+class A{
+    public static $flag="flag{123123123}";
+    const  PI=3.14;
+    static function hello(){
+        echo "hello</br>";
+    }
+}
+$a=new ReflectionClass('A');
+
+var_dump($a->getConstants());  获取一组常量
+输出
+array(1) {
+     ["PI"]=>
+      float(3.14)
+  }
+
+var_dump($a->getName());    获取类名
+输出
+string(1) "A"
+
+var_dump($a->getStaticProperties()); 获取静态属性
+输出
+array(1) {
+    ["flag"]=>
+      string(15) "flag{123123123}"
+  }
+
+var_dump($a->getMethods()); 获取类中的方法
+输出
+array(1) {
+    [0]=>
+      object(ReflectionMethod)#2 (2) {
+           ["name"]=>
+            string(5) "hello"
+            ["class"]=>
+            string(1) "A"
+       }
+  }
+</blockquote>
+<p>web 102 :payload :</p>
+<blockquote>
+<p>$a=’&lt;?=<code>cat *</code>;’; </p>
+<p>$b=base64_encode($a);  <em>// PD89YGNhdCAqYDs=</em> </p>
+<p>$c=bin2hex($b);      <em>//这里直接用去掉=的base64</em> </p>
+<p>输出   5044383959474e6864434171594473</p>
+</blockquote>
+<p>因为这题要构造出纯数字(可以包含e)的payload，所以很难。</p>
+<p>web 104 : sha1比较</p>
+<p>payload :aaK1STfY&amp;aaO8zKZF</p>
+<p>web 109 :</p>
+<p>异常处理类——Exception</p>
+<p>内置类使用时会先执行括号里的命令，所以可以执行命令</p>
+<p>web 110 :</p>
+<p>FilesystemIterator类的使用getcwd()函数，获取当前工作目录，返回当前工作目录</p>
+<p>web 111 :</p>
+<blockquote>
+<p>$GLOBALS — 引用全局作用域中可用的全部变量<br>一个包含了全部变量的全局组合数组。变量的名字就是数组的键。</p>
+</blockquote>
+<p>web 112 :</p>
+<p>is_file无法将php伪协议识别为文件，但是highlight_file可以</p>
+<p>web 113 :</p>
+<blockquote>
+<p>payload:file=/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/var/www/html/flag.php</p>
+<p>在linux中/proc/self/root是指向根目录的，也就是如果在命令行中输入ls /proc/self/root，其实显示的内容是根目录下的内容<br>多次重复后绕过is_file的具体原理尚不清楚。</p>
+</blockquote>
+<p>web 115 :</p>
+<blockquote>
+<p>语法<br>trim(string,charlist)</p>
+<p>参数    描述<br>string            必需。规定要检查的字符串。<br>charlist        可选。规定从字符串中删除哪些字符。如果省略该参数，则移除下列所有字符：</p>
+<p>“\0”       - NULL<br>“\t”       - 制表符<br>“\n”       - 换行<br>“\x0B”     - 垂直制表符<br>“\r”       - 回车<br>“ “        - 空格</p>
+</blockquote>
+<blockquote>
+<p>绕过is_numeric 用数字和+-.号和 %09 %0a %0b %0c %0d %20</p>
+</blockquote>
+<p>web 128 :</p>
+<blockquote>
+<p>gettext函数参数如果是未定义的字符,直接返回原字符(_()是gettext()函数的简写形式)</p>
+<p>get_defined_vars( void) : array<br>返回由所有已定义变量所组成的数组 </p>
+</blockquote>
+<p>web 131 :</p>
+<blockquote>
+<p>利用了php中正则表达式进行匹配有一定的限制，超过限制直接返回false<br>这个限制是防止正则匹配时占用资源过多设置</p>
+</blockquote>
+<p>防御方式为用<code>===</code>号来判断<code>preg_match</code>的返回值为0或1</p>
+<p>web 137 :</p>
+<p>payload : call_user_func(ctfshow::getFlag)</p>
+<blockquote>
+<p>php中 -&gt;与:: 调用类中的成员的区别 -&gt;用于动态语境处理某个类的某个实例 ::可以调用一个静态的、不依赖于其他初始化的类方法.</p>
+<p>也就是说双冒号可以不用实例化类就可以直接调用类中的方法</p>
+</blockquote>
+<p>web 138 :</p>
+<blockquote>
+<p>call_user_func的参数除了是字符串也可以是数组</p>
+</blockquote>
+<p>payload : call_user_func(ctfshow[0],ctfshow[1])</p>
+<p>​                POST : ctfshow[0]=ctfshow&amp;ctfshow[1]=getFlag</p>
+<p>web 139 :</p>
+<blockquote>
+<p>用awk命令、cut命令截取字符 sleep命令确认是否正确 </p>
+<p>awk NR==2 获取第二行信息 </p>
+<p>cut -c 1  截取第1个字符</p>
+<p>命令行中if语句的格式为:</p>
+<p>if [ 条件 ];then 语句;fi //记得if后的[后要有空格</p>
+</blockquote>
+<blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if :; then echo &quot;always true&quot;; fi</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><code>:</code>是一个特殊的命令，称为空命令，该命令不做任何事，但Exit Status总是真。此外，也可以执行<code>/bin/true</code>或<code>/bin/false</code>得到真或假的Exit Status。</p>
+</blockquote>
+<p>web 141 :</p>
+<blockquote>
+<p>eval(“return 1;phpinfo();”);是无法执行的</p>
+<p>eval(“return 1-phpinfo()-1”);是可以执行的</p>
+</blockquote>
+<p>web 147 :</p>
+<p>考察点：create_function()代码注入</p>
+<blockquote>
+<p>create_function(‘$a’,’echo $a.”123”‘)</p>
+<p>类似于</p>
+<p>function f($a) {<br>  echo $a.”123”;<br>}</p>
+</blockquote>
+<p>那么如果我们第二个参数传入 echo 1;}phpinfo();//<br>就等价于</p>
+<blockquote>
+<p>function f($a) {<br>  echo 1;}phpinfo();//<br>}<br>从而执行phpinfo()命令</p>
+</blockquote>
+<blockquote>
+<p>可以在函数名前加上命名空间<br>system =&gt;\system<br><code>\</code>是全局命名空间</p>
+<p>php里默认命名空间是\，所有原生函数和类都在这个命名空间中。 普通调用一个函数，如果直接写函数名function_name()调用，调用的时候其实相当于写了一个相对路 径； 而如果写\function_name()这样调用函数，则其实是写了一个绝对路径。 如果你在其他namespace里调用系统类，就必须写绝对路径这种写法</p>
+</blockquote>
 
     </div>
 
@@ -267,12 +373,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/12/20/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cweb%E8%BF%9B%E9%98%B6%E5%8C%BAsupersqlwp/" rel="prev" title="攻防世界web进阶区 supersql wp">
-      <i class="fa fa-chevron-left"></i> 攻防世界web进阶区 supersql wp
+    <a href="/2021/01/30/ctfshow%20sql%20payload/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/12/29/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cweb%E8%BF%9B%E9%98%B6%E5%8C%BAwp/" rel="next" title="攻防世界web进阶区简记">
-      攻防世界web进阶区简记 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/03/03/PHP%20escapeshellarg()+escapeshellcmd()%20%E5%88%A9%E7%94%A8/" rel="next" title="escapeshellarg与escapeshellcmd造成的逃逸漏洞">
+      escapeshellarg与escapeshellcmd造成的逃逸漏洞 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -332,7 +438,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%8F%E6%84%9F%E7%9B%AE%E5%BD%95%E6%B3%84%E6%BC%8F"><span class="nav-text">敏感目录泄漏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%8F%E6%84%9F%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6"><span class="nav-text">敏感备份文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Banner%E8%AF%86%E5%88%AB"><span class="nav-text">Banner识别</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
